@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Luiz Felipe de Lara</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .login-header p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .login-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 4px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-container {
+            position: relative;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+            background: white;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input::placeholder {
+            color: #999;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .register-form {
+            display: none;
+        }
+        
+        .register-form.active {
+            display: block;
+        }
+        
+        .login-form.active {
+            display: block;
+        }
+        
+        .login-form:not(.active) {
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>🔐 Acesso</h1>
+            <p>Faça login ou crie uma conta para continuar</p>
+        </div>
+        
+        <div class="login-tabs">
+            <button class="tab-btn active" id="loginTab">Login</button>
+            <button class="tab-btn" id="registerTab">Cadastro</button>
+        </div>
+        
+        <div class="form-container">
+            <div class="success-message" id="successMessage"></div>
+            <div class="error-message" id="errorMessage"></div>
+            
+            <!-- Formulário de Login -->
+            <div class="login-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Usuário:</label>
+                    <input type="text" id="loginUsername" placeholder="Digite seu usuário" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha:</label>
+                    <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+                </div>
+                <button class="auth-btn" id="loginSubmit">Entrar</button>
+            </div>
+            
+            <!-- Configurações de Cache -->
+            <div class="cache-settings">
+                <label class="cache-checkbox">
+                    <input type="checkbox" id="autoCleanupCheckbox" checked>
+                    <span>Limpar cache automaticamente ao sair</span>
+                </label>
+            </div>
+            
+            <!-- Formulário de Cadastro -->
+            <div class="register-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Usuário:</label>
+                    <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Digite seu email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha:</label>
+                    <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Senha:</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="Confirme sua senha" required>
+                </div>
+                <button class="auth-btn" id="registerSubmit">Criar Conta</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cliente de banco de dados -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+    <script src="database-client.js"></script>
+    
+    <script>
+        // Elementos DOM
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('loginSubmit');
+        const registerSubmit = document.getElementById('registerSubmit');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Inicializa o banco de dados quando a página carrega
+        let dbInitialized = false;
+        
+        // Função para inicializar o cliente de banco de dados
+        async function initializeDatabase() {
+            try {
+                if (!window.dbClient) {
+                    console.error('Cliente de banco de dados não encontrado');
+                    return false;
+                }
+                
+                const success = await window.dbClient.initialize();
+                if (success) {
+                    console.log('Sistema de banco de dados inicializado com sucesso!');
+                    return true;
+                } else {
+                    console.error('Falha ao inicializar banco de dados');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Erro ao inicializar cliente de banco de dados:', error);
+                return false;
+            }
+        }
+        
+        // Função para alternar entre abas
+        function switchTab(activeTab) {
+            // Remove classe active de todas as abas
+            loginTab.classList.remove('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.remove('active');
+            registerForm.classList.remove('active');
+            
+            // Adiciona classe active na aba selecionada
+            if (activeTab === 'login') {
+                loginTab.classList.add('active');
+                loginForm.classList.add('active');
+            } else {
+                registerTab.classList.add('active');
+                registerForm.classList.add('active');
+            }
+            
+            // Limpa mensagens
+            hideMessages();
+        }
+        
+        // Função para mostrar mensagens
+        function showMessage(message, type) {
+            hideMessages();
+            if (type === 'success') {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+            } else {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+        }
+        
+        // Função para esconder mensagens
+        function hideMessages() {
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+        }
+        
+        // Event listeners para as abas
+        loginTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchTab('login');
+        });
+        
+        registerTab.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchTab('register');
+        });
+        
+        // Função para validar formulário de cadastro
+        function validateRegisterForm(username, email, password, confirmPassword) {
+            if (!username || !email || !password || !confirmPassword) {
+                return 'Todos os campos são obrigatórios';
+            }
+            
+            if (username.length < 3) {
+                return 'O nome de usuário deve ter pelo menos 3 caracteres';
+            }
+            
+            if (password.length < 6) {
+                return 'A senha deve ter pelo menos 6 caracteres';
+            }
+            
+            if (password !== confirmPassword) {
+                return 'As senhas não coincidem';
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Email inválido';
+            }
+            
+            return null;
+        }
+        
+        // Event listener para cadastro
+        registerSubmit.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Garante que o banco está inicializado
+            await initializeDatabase();
+            if (!dbInitialized) {
+                showMessage('Erro: Banco de dados não disponível', 'error');
+                return;
+            }
+            
+            const username = document.getElementById('registerUsername').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            const validationError = validateRegisterForm(username, email, password, confirmPassword);
+            if (validationError) {
+                showMessage(validationError, 'error');
+                return;
+            }
+            
+            try {
+                // Registra usuário no SQLite local
+                const result = await window.dbClient.register(username, email, password);
+                
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    
+                    // Limpa formulário
+                    document.getElementById('registerUsername').value = '';
+                    document.getElementById('registerEmail').value = '';
+                    document.getElementById('registerPassword').value = '';
+                    document.getElementById('registerConfirmPassword').value = '';
+                    
+                    // Muda para aba de login após 2 segundos
+                    setTimeout(() => {
+                        switchTab('login');
+                    }, 2000);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Erro no cadastro:', error);
+                showMessage('Erro interno do sistema', 'error');
+            }
+        });
+        
+        // Event listener para login
+        loginSubmit.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Garante que o banco está inicializado
+            await initializeDatabase();
+            if (!dbInitialized) {
+                showMessage('Erro: Banco de dados não disponível', 'error');
+                return;
+            }
+            
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!username || !password) {
+                showMessage('Por favor, preencha todos os campos', 'error');
+                return;
+            }
+            
+            try {
+                // Faz login usando SQLite local
+                const result = await window.dbClient.login(username, password);
+                
+                if (result.success) {
+                    showMessage(result.message + ' Redirecionando...', 'success');
+                    
+                    // Redireciona para a página principal após 1.5 segundos
+                    setTimeout(() => {
+                        window.location.href = 'minhaPagina.html';
+                    }, 1500);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Erro no login:', error);
+                showMessage('Erro interno do sistema', 'error');
+            }
+        });
+        
+        // Verifica se usuário já está logado e inicializa o banco
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Inicializa o banco de dados
+            await initializeDatabase();
+            
+            // Configura o checkbox de limpeza automática
+            const autoCleanupCheckbox = document.getElementById('autoCleanupCheckbox');
+            if (autoCleanupCheckbox && window.dbClient) {
+                // Define o estado inicial baseado na configuração salva
+                autoCleanupCheckbox.checked = window.dbClient.isAutoCleanupEnabled();
+                
+                // Adiciona listener para mudanças
+                autoCleanupCheckbox.addEventListener('change', (e) => {
+                    window.dbClient.setAutoCleanup(e.target.checked);
+                });
+            }
+            
+            // Força sempre mostrar a tela de login
+            // Remove qualquer sessão existente para garantir novo login
+            localStorage.removeItem('currentUser');
+            console.log('Sistema configurado para solicitar login a cada acesso');
+        });
+    </script>
+</body>
+</html>

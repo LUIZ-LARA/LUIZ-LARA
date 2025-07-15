@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luiz Felipe de Lara - Estudante de Engenharia de Software</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Tanque/tanque.css">
+    <link rel="stylesheet" href="Tanque/bricks.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="battleCityCanvas" style="position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none;"></canvas>
+    
+    <div class="brick-wall top"></div>
+    <div class="brick-wall bottom"></div>
+    <div class="brick-wall left"></div>
+    <div class="brick-wall right"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="img/perfilGitHub.jpg" alt="Luiz Felipe" class="profile-photo">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="name">Luiz Felipe de Lara</h1>
+                        <p class="title">Estudante de Engenharia de Software  2º Semestre</p>
+                        <div class="location">
+                            <span class="location-icon">📍</span>
+                            <span> Cascavel-PR | Brasil</span>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                <div class="interaction-card">
+                    <div class="interaction-header">
+                        <h3 class="interaction-title">💫 Interações</h3>
+                    </div>
+                    
+                    <div class="like-section">
+                        <button class="like-btn" id="likeBtn">
+                            <i class="fas fa-heart"></i>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="dislike-btn" id="dislikeBtn">
+                            <i class="fas fa-heart-broken"></i>
+                            <span class="dislike-count">0</span>
+                        </button>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span id="viewsCount">0 visualizações</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="comments-btn" id="commentsBtn">
+                            <i class="fas fa-comments"></i>
+                            Comentários (<span id="commentCount">0</span>)
+                        </button>
+                    </div>
+                    
+                    <div class="mood-section">
+                        <span class="mood-label">Humor atual:</span>
+                        <div class="mood-indicator">
+                            <span class="mood-emoji">🚀</span>
+                            <span class="mood-text">Programando!</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section class="about-me">
+            <div class="section-content">
+                <h3 class="section-title">🚀 Descobrindo o mundo através da programação</h3>
+                <div class="about-content">
+                    <p class="about-description">
+                        Sou estudante de Engenharia de Software, no 2º semestre. Estou descobrindo o mundo através da programação e quero aprender todas as linguagens possíveis. Estudo atualmente: Java, JavaScript, HTML, CSS, Lua. Estou focado em aprender a sintaxe básica de cada linguagem e fortalecer minha lógica de programação. Ainda estou no início da jornada, mas com muita vontade de aprender.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills">
+            <div class="section-content">
+                <h3 class="section-title">📚 Tecnologias que estou estudando</h3>
+                <div class="skills-grid">
+                <div class="skill-card" data-skill="html">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <span class="skill-name">HTML</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 35%"></div>
+                    </div>
+                    <span class="skill-status">Iniciante</span>
+                </div>
+                <div class="skill-card" data-skill="css">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <span class="skill-name">CSS</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 30%"></div>
+                    </div>
+                    <span class="skill-status">Iniciante</span>
+                </div>
+                <div class="skill-card" data-skill="java">
+                    <div class="skill-icon"><i class="fab fa-java"></i></div>
+                    <span class="skill-name">Java</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 20%"></div>
+                    </div>
+                    <span class="skill-status">Começando</span>
+                </div>
+                <div class="skill-card" data-skill="python">
+                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                    <span class="skill-name">Python</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 15%"></div>
+                    </div>
+                    <span class="skill-status">Começando</span>
+                </div>
+                <div class="skill-card" data-skill="javascript">
+                    <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                    <span class="skill-name">JavaScript</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 25%"></div>
+                    </div>
+                    <span class="skill-status">Aprendendo</span>
+                </div>
+                <div class="skill-card" data-skill="lua">
+                    <div class="skill-icon"><i class="fas fa-moon"></i></div>
+                    <span class="skill-name">Lua</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 20%"></div>
+                    </div>
+                    <span class="skill-status">Iniciante</span>
+                </div>
+                <div class="skill-card" data-skill="logic">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <span class="skill-name">Lógica de Programação</span>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--progress: 30%"></div>
+                    </div>
+                    <span class="skill-status">Desenvolvendo</span>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects">
+            <div class="section-content">
+                <h3 class="section-title">💻 Projetos de Aprendizado</h3>
+                <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-globe"></i></div>
+                        <div class="project-status study">Em Desenvolvimento</div>
+                    </div>
+                    <h4 class="project-title">Portfolio Pessoal</h4>
+                    <p class="project-description">
+                        Meu primeiro projeto web para praticar HTML, CSS e JavaScript. Aprendendo sobre estrutura, estilização e interatividade básica.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-server"></i></div>
+                        <div class="project-status learning">Aprendendo</div>
+                    </div>
+                    <h4 class="project-title">Servidor FiveM</h4>
+                    <p class="project-description">
+                        Aprendendo a configurar e abrir um servidor no FiveM, explorando modificações e scripts para GTA V.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">FiveM</span>
+                        <span class="tech-tag">Lua</span>
+                        <span class="tech-tag">Servidor</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-code"></i></div>
+                        <div class="project-status planned">Próximo Passo</div>
+                    </div>
+                    <h4 class="project-title">Scripts em Lua</h4>
+                    <p class="project-description">
+                        Explorando a linguagem Lua para entender diferentes paradigmas de programação e fortalecer a lógica.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Lua</span>
+                        <span class="tech-tag">Scripts</span>
+                        <span class="tech-tag">Lógica</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="section-content">
+                <div class="contact-content">
+                <h3 class="section-title">📬 Contato</h3>
+                <p class="contact-description">
+                    Sempre aberto para trocar experiências, tirar dúvidas e aprender junto com outros estudantes de programação!
+                </p>
+                <div class="motivational-message">
+                    <p><strong>Vamos aprender juntos!</strong></p>
+                </div>
+                <div class="contact-links">
+                    <a href="mailto:luizfelipedelara856@gmail.com" class="contact-link">
+                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://discord.gg/CkxkSBaN6m" target="_blank" class="contact-link">
+                        <span class="contact-icon"><i class="fab fa-discord"></i></span>
+                        <span>Discord</span>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="comments-sidebar" id="commentsSidebar">
+        <div class="comments-header">
+            <h3>💬 Comentários</h3>
+            <button class="close-comments" id="closeComments">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="comments-content">
+            <div class="comments-form">
+                <div class="comment-form">
+                    <div class="form-group" style="display: none;">
+                        <input type="text" id="commentAuthor" placeholder="Seu nome" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="commentInput" placeholder="Deixe seu comentário..." maxlength="500" required></textarea>
+                    </div>
+                    <button type="submit" id="submitComment" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Enviar Comentário
+                    </button>
+                </div>
+            </div>
+            
+            <div class="comments-list" id="commentsList">
+                <div class="loading-comments">
+                    <i class="fas fa-spinner fa-spin"></i> Carregando comentários...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments-overlay" id="commentsOverlay"></div>
+
+    <div class="tank-pixel-art" id="pixelTank">
+        <div class="tank-track-left"></div>
+        <div class="tank-track-right"></div>
+        <div class="tank-body"></div>
+        <div class="tank-turret"></div>
+        <div class="tank-cannon"></div>
+        <div class="tank-camo-1"></div>
+        <div class="tank-camo-2"></div>
+        <div class="tank-camo-3"></div>
+        <div class="tank-detail-1"></div>
+        <div class="tank-detail-2"></div>
+        <div class="tank-antenna"></div>
+        <div class="tank-light"></div>
+    </div>
+
+    <!-- Carrega sql.js do CDN -->
+    <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+    <!-- Carrega nosso cliente de banco de dados -->
+    <script src="database-client.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Força login a cada carregamento da página
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Limpa qualquer sessão existente
+            if (window.dbClient) {
+                await window.dbClient.initialize();
+                // Remove sessão do localStorage para forçar novo login
+                localStorage.removeItem('currentUser');
+                console.log('Sessão limpa - redirecionando para login');
+            }
+            
+            // Sempre redireciona para a página de login
+            window.location.href = 'index.html';
+        });
+        
+        // Funções globais para verificação de login
+        window.isLoggedIn = function() {
+            const currentUser = localStorage.getItem('currentUser');
+            return currentUser !== null;
+        };
+        
+        window.getCurrentUser = function() {
+            const currentUser = localStorage.getItem('currentUser');
+            return currentUser ? JSON.parse(currentUser).username : null;
+        };
+    </script>
+</body>
+</html>
