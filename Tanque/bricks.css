@@ -1,0 +1,62 @@
+.brick-wall {
+    position: fixed;
+    background-color: #8B4513;
+    border: 1px solid #654321;
+    z-index: 5;
+}
+
+.brick-wall.top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        #8B4513 0px,
+        #8B4513 20px,
+        #654321 20px,
+        #654321 21px
+    );
+}
+
+.brick-wall.bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        #8B4513 0px,
+        #8B4513 20px,
+        #654321 20px,
+        #654321 21px
+    );
+}
+
+.brick-wall.left {
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        0deg,
+        #8B4513 0px,
+        #8B4513 20px,
+        #654321 20px,
+        #654321 21px
+    );
+}
+
+.brick-wall.right {
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        0deg,
+        #8B4513 0px,
+        #8B4513 20px,
+        #654321 20px,
+        #654321 21px
+    );
+}
